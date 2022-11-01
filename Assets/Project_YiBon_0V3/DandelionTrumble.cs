@@ -12,6 +12,9 @@ public class DandelionTrumble : MonoBehaviour
 
     GameObject HitTarget;
 
+    bool isAudioPlaying = false;
+
+
     void Start()
     {
         OriginalPos = transform.position;
@@ -29,10 +32,12 @@ public class DandelionTrumble : MonoBehaviour
         }
 
         float dist = Vector3.Distance(transform.position, HitTarget.transform.position);
-        print(dist);
+        
+        //print(dist);
         if(dist < 1.5f)
         {
             StartTrumble();
+            //PlayAudio();
         }
         Trumble();
     }
@@ -43,12 +48,24 @@ public class DandelionTrumble : MonoBehaviour
         {
             timePassed = 0;
             randomScale = Random.Range(0f, 0.08f);
+            PlayAudio();
+        }        
+    }
+    void PlayAudio()
+    {
+        if (!isAudioPlaying)
+        {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
+            print("play audio:" + audio.clip.name);
+            isAudioPlaying = true;
         }
     }
 
     void Trumble()
     {
         timePassed += Time.deltaTime;
+        //PlayAudio();
         if (timePassed < 1f)
         {
             //transform.position = OriginalPos + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
@@ -59,6 +76,7 @@ public class DandelionTrumble : MonoBehaviour
         {
             //transform.position = OriginalPos;
             transform.localScale = OriginalScale;
+            isAudioPlaying = false;
         }
     }
 }

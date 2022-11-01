@@ -7,7 +7,7 @@ using TMPro;
 public class LetterSetContainer_Controller : MonoBehaviour
 {
     public GameObject LetterSet;
-    DandelionTrumble Trumble;
+    //DandelionTrumble Trumble;
 
     private void Start()
     {

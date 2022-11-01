@@ -8,7 +8,7 @@ public class DandelionContainer_Controller : MonoBehaviour
     float bottomY = -3;
     void Start()
     {
-        print(Dandelions.Count);
+        //print(Dandelions.Count);
     }
 
     // Update is called once per frame
@@ -33,5 +33,19 @@ public class DandelionContainer_Controller : MonoBehaviour
         Dandelion.transform.Find("Origin").GetComponent<SpriteRenderer>().enabled = false;
 
         Dandelion.transform.Find("Head").GetComponent<DandelionTrumble>().LettersCount = UserText.Length;
+    }
+
+    public void TrumbleAll()
+    {
+        print("trumble all");
+        if(transform.childCount > 0)
+        {
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                Transform Dandelion = transform.GetChild(i);
+                GameObject Head = Dandelion.transform.Find("Head").gameObject;
+                Head.GetComponent<DandelionTrumble>().StartTrumble();
+            }
+        }
     }
 }
