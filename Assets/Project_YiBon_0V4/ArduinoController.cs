@@ -108,3 +108,60 @@ public class ArduinoController : MonoBehaviour
         Arduino.Close();
     }
 }
+
+/*********************************************
+// Arduino
+
+int sensorPin = A0;
+int threshold = 20;
+int sensorValue, pSensorValue;
+bool activateTimer = false;
+int timeStarted, timeNow, timePassed, timeLimit = 2; //<--adjust!!!
+int relayPin = 6;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(relayPin, OUTPUT);
+}
+
+void loop() {
+  int value = analogRead(sensorPin);
+  if (value > threshold) {
+    sensorValue = 1;
+  } else {
+    sensorValue = 0;
+  }
+
+  int serialOut = 0;
+  if (sensorValue == 1 && activateTimer == false) {
+    if (pSensorValue == 0) {
+      serialOut = 1;
+      //Serial.println("Timer Start **********************************");
+      activateTimer = true;
+      timeStarted = millis() / 1000;
+      //Serial.println("timeStarted");
+      Serial.println(serialOut);
+      //delay(20);
+      digitalWrite(relayPin, HIGH);
+      serialOut = 0;
+    }
+  }
+  pSensorValue = sensorValue;
+
+  if (activateTimer) {
+    timeNow = millis() / 1000;
+    timePassed = timeNow - timeStarted;
+    if (timePassed > timeLimit) {
+      //Serial.println("Timer Stop ---------------------------");
+      activateTimer = false;
+      digitalWrite(relayPin, LOW);
+    }
+  }
+
+  if (Serial.available()) {
+    char c = Serial.read();
+    Serial.println(serialOut);
+    //delay(20);
+  }
+}
+*********************************************/
