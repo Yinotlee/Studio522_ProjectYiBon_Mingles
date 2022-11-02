@@ -13,7 +13,8 @@ public class ArduinoController : MonoBehaviour
     public DandelionContainer_Controller DandelionContainerScript;
 
     SerialPort Arduino;
-    string portName = "COM5";
+    string portName = "";
+    //string portName = "COM5";
     //string portName = "/dev/cu.usbmodem14201";
     public string SerialIn = null;
 
@@ -21,6 +22,16 @@ public class ArduinoController : MonoBehaviour
 
     void Start()
     {
+        string os = SystemInfo.operatingSystem;
+        print(SystemInfo.operatingSystem);
+        if (os.StartsWith("Windows")){
+            portName = "COM5";
+        }
+        else if (os.StartsWith("Mac"))
+        {
+            portName = "/dev/cu.usbmodem14201";
+        }
+
         string[] ports = SerialPort.GetPortNames();
 
         foreach (string port in ports)
@@ -30,6 +41,9 @@ public class ArduinoController : MonoBehaviour
         Arduino = new SerialPort(portName.ToString(), 9600);
         Arduino.Open();
         Arduino.ReadTimeout = 1000; //milliseconds
+
+        InputField.ActivateInputField();
+        InputField.Select();
     }
 
     void Update()
@@ -62,7 +76,7 @@ public class ArduinoController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            PlayAudio();
+            //PlayAudio();
         }
     }
 
